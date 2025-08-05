@@ -1,5 +1,7 @@
 # Battleship Game (HTML/CSS/JS)
 
+🔗 **Live Demo:** [https://mbilvl.github.io/battleship-html-js](https://mbilvl.github.io/battleship-html-js)
+
 A simple browser-based Battleship game built with vanilla JavaScript, HTML, and CSS. This version includes a grid-based UI where a human player places ships and battles against a computer-controlled bot.
 
 ## 🕹️ Features
@@ -36,6 +38,14 @@ This is a basic version and is intended for educational or experimental use. No 
 ## 📬 Contributions
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## 👤 Contributors
+
+- [@mbilvl](https://github.com/mbilvl)
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
