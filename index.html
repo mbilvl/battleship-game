@@ -1,338 +1,1394 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship Game</title>
-    <link rel="stylesheet" href="main.css">
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚢</text></svg>"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="main.js"></script>
-</head>
-<body>
-    <header>
-        <h2>Battleship</h2>
+  </head>
+  <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <header
+      class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white shadow-lg"
+    >
+      <div class="container mx-auto px-4 py-6">
+        <h1 class="text-3xl md:text-4xl font-bold text-center">
+          🚢 Battleship
+        </h1>
+      </div>
     </header>
-    <div class="container">
-        <h2 id="win"></h2>
-        <div class="column" style="background-color:#aaa;">
-            <h3 style="color: #d62828;">Player1</h3>
-            <h4 id="p-hits">Hits 0/17</h4>
-            <div id="placement">
-                <h5 id="ship-msg">Place the "Carrier (5 spaces)"</h5>
-                <button onclick="setOrientation(0)">Horizontal</button>
-                <span id="orient" style="color: green;">horizontal</span>
-                <button onclick="setOrientation(1)">Vertical</button>
-            </div>
-            <table>
-                <tr>
-                    <td></td>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                    <th>7</th>
-                    <th>8</th>
-                    <th>9</th>
-                    <th>10</th>
-                </tr>
-                <tr>
-                    <th>A</th>
-                    <td onclick="userShip('00')"><span id="p00"></span></td>
-                    <td onclick="userShip('01')"><span id="p01"></span></td>
-                    <td onclick="userShip('02')"><span id="p02"></span></td>
-                    <td onclick="userShip('03')"><span id="p03"></span></td>
-                    <td onclick="userShip('04')"><span id="p04"></span></td>
-                    <td onclick="userShip('05')"><span id="p05"></span></td>
-                    <td onclick="userShip('06')"><span id="p06"></span></td>
-                    <td onclick="userShip('07')"><span id="p07"></span></td>
-                    <td onclick="userShip('08')"><span id="p08"></span></td>
-                    <td onclick="userShip('09')"><span id="p09"></span></td>
-                </tr>
-                <tr>
-                    <th>B</th>
-                    <td onclick="userShip('10')"><span id="p10"></span></td>
-                    <td onclick="userShip('11')"><span id="p11"></span></td>
-                    <td onclick="userShip('12')"><span id="p12"></span></td>
-                    <td onclick="userShip('13')"><span id="p13"></span></td>
-                    <td onclick="userShip('14')"><span id="p14"></span></td>
-                    <td onclick="userShip('15')"><span id="p15"></span></td>
-                    <td onclick="userShip('16')"><span id="p16"></span></td>
-                    <td onclick="userShip('17')"><span id="p17"></span></td>
-                    <td onclick="userShip('18')"><span id="p18"></span></td>
-                    <td onclick="userShip('19')"><span id="p19"></span></td>
-                </tr>
-                <tr>
-                    <th>C</th>
-                    <td onclick="userShip('20')"><span id="p20"></span></td>
-                    <td onclick="userShip('21')"><span id="p21"></span></td>
-                    <td onclick="userShip('22')"><span id="p22"></span></td>
-                    <td onclick="userShip('23')"><span id="p23"></span></td>
-                    <td onclick="userShip('24')"><span id="p24"></span></td>
-                    <td onclick="userShip('25')"><span id="p25"></span></td>
-                    <td onclick="userShip('26')"><span id="p26"></span></td>
-                    <td onclick="userShip('27')"><span id="p27"></span></td>
-                    <td onclick="userShip('28')"><span id="p28"></span></td>
-                    <td onclick="userShip('29')"><span id="p29"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>D</th>
-                    <td onclick="userShip('30')"><span id="p30"></span></td>
-                    <td onclick="userShip('31')"><span id="p31"></span></td>
-                    <td onclick="userShip('32')"><span id="p32"></span></td>
-                    <td onclick="userShip('33')"><span id="p33"></span></td>
-                    <td onclick="userShip('34')"><span id="p34"></span></td>
-                    <td onclick="userShip('35')"><span id="p35"></span></td>
-                    <td onclick="userShip('36')"><span id="p36"></span></td>
-                    <td onclick="userShip('37')"><span id="p37"></span></td>
-                    <td onclick="userShip('38')"><span id="p38"></span></td>
-                    <td onclick="userShip('39')"><span id="p39"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>E</th>
-                    <td onclick="userShip('40')"><span id="p40"></span></td>
-                    <td onclick="userShip('41')"><span id="p41"></span></td>
-                    <td onclick="userShip('42')"><span id="p42"></span></td>
-                    <td onclick="userShip('43')"><span id="p43"></span></td>
-                    <td onclick="userShip('44')"><span id="p44"></span></td>
-                    <td onclick="userShip('45')"><span id="p45"></span></td>
-                    <td onclick="userShip('46')"><span id="p46"></span></td>
-                    <td onclick="userShip('47')"><span id="p47"></span></td>
-                    <td onclick="userShip('48')"><span id="p48"></span></td>
-                    <td onclick="userShip('49')"><span id="p49"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>F</th>
-                    <td onclick="userShip('50')"><span id="p50"></span></td>
-                    <td onclick="userShip('51')"><span id="p51"></span></td>
-                    <td onclick="userShip('52')"><span id="p52"></span></td>
-                    <td onclick="userShip('53')"><span id="p53"></span></td>
-                    <td onclick="userShip('54')"><span id="p54"></span></td>
-                    <td onclick="userShip('55')"><span id="p55"></span></td>
-                    <td onclick="userShip('56')"><span id="p56"></span></td>
-                    <td onclick="userShip('57')"><span id="p57"></span></td>
-                    <td onclick="userShip('58')"><span id="p58"></span></td>
-                    <td onclick="userShip('59')"><span id="p59"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>G</th>
-                    <td onclick="userShip('60')"><span id="p60"></span></td>
-                    <td onclick="userShip('61')"><span id="p61"></span></td>
-                    <td onclick="userShip('62')"><span id="p62"></span></td>
-                    <td onclick="userShip('63')"><span id="p63"></span></td>
-                    <td onclick="userShip('64')"><span id="p64"></span></td>
-                    <td onclick="userShip('65')"><span id="p65"></span></td>
-                    <td onclick="userShip('66')"><span id="p66"></span></td>
-                    <td onclick="userShip('67')"><span id="p67"></span></td>
-                    <td onclick="userShip('68')"><span id="p68"></span></td>
-                    <td onclick="userShip('69')"><span id="p69"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>H</th>
-                    <td onclick="userShip('70')"><span id="p70"></span></td>
-                    <td onclick="userShip('71')"><span id="p71"></span></td>
-                    <td onclick="userShip('72')"><span id="p72"></span></td>
-                    <td onclick="userShip('73')"><span id="p73"></span></td>
-                    <td onclick="userShip('74')"><span id="p74"></span></td>
-                    <td onclick="userShip('75')"><span id="p75"></span></td>
-                    <td onclick="userShip('76')"><span id="p76"></span></td>
-                    <td onclick="userShip('77')"><span id="p77"></span></td>
-                    <td onclick="userShip('78')"><span id="p78"></span></td>
-                    <td onclick="userShip('79')"><span id="p79"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>I</th>
-                    <td onclick="userShip('80')"><span id="p80"></span></td>
-                    <td onclick="userShip('81')"><span id="p81"></span></td>
-                    <td onclick="userShip('82')"><span id="p82"></span></td>
-                    <td onclick="userShip('83')"><span id="p83"></span></td>
-                    <td onclick="userShip('84')"><span id="p84"></span></td>
-                    <td onclick="userShip('85')"><span id="p85"></span></td>
-                    <td onclick="userShip('86')"><span id="p86"></span></td>
-                    <td onclick="userShip('87')"><span id="p87"></span></td>
-                    <td onclick="userShip('88')"><span id="p88"></span></td>
-                    <td onclick="userShip('89')"><span id="p89"></span></td>
-                </tr>
-                <tr>
-                    <th>J</th>
-                    <td onclick="userShip('90')"><span id="p90"></span></td>
-                    <td onclick="userShip('91')"><span id="p91"></span></td>
-                    <td onclick="userShip('92')"><span id="p92"></span></td>
-                    <td onclick="userShip('93')"><span id="p93"></span></td>
-                    <td onclick="userShip('94')"><span id="p94"></span></td>
-                    <td onclick="userShip('95')"><span id="p95"></span></td>
-                    <td onclick="userShip('96')"><span id="p96"></span></td>
-                    <td onclick="userShip('97')"><span id="p97"></span></td>
-                    <td onclick="userShip('98')"><span id="p98"></span></td>
-                    <td onclick="userShip('99')"><span id="p99"></span></td>
-                    
-                </tr>
-            </table>
-        </div>
-        <div class="column" style="background-color:#bbb;">
-            <h3 style="color: #d62828;">Bot</h3>
-            <h4 id="b-hits">Hits 0/17</h4>
-            <table>
-                <tr>
-                    <td></td>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                    <th>7</th>
-                    <th>8</th>
-                    <th>9</th>
-                    <th>10</th>
-                </tr>
-                <tr>
-                    <th>A</th>
-                    <td onclick="userShot('00')"><span id="b00"></span></td>
-                    <td onclick="userShot('01')"><span id="b01"></span></td>
-                    <td onclick="userShot('02')"><span id="b02"></span></td>
-                    <td onclick="userShot('03')"><span id="b03"></span></td>
-                    <td onclick="userShot('04')"><span id="b04"></span></td>
-                    <td onclick="userShot('05')"><span id="b05"></span></td>
-                    <td onclick="userShot('06')"><span id="b06"></span></td>
-                    <td onclick="userShot('07')"><span id="b07"></span></td>
-                    <td onclick="userShot('08')"><span id="b08"></span></td>
-                    <td onclick="userShot('09')"><span id="b09"></span></td>
-                </tr>
-                <tr>
-                    <th>B</th>
-                    <td onclick="userShot('10')"><span id="b10"></span></td>
-                    <td onclick="userShot('11')"><span id="b11"></span></td>
-                    <td onclick="userShot('12')"><span id="b12"></span></td>
-                    <td onclick="userShot('13')"><span id="b13"></span></td>
-                    <td onclick="userShot('14')"><span id="b14"></span></td>
-                    <td onclick="userShot('15')"><span id="b15"></span></td>
-                    <td onclick="userShot('16')"><span id="b16"></span></td>
-                    <td onclick="userShot('17')"><span id="b17"></span></td>
-                    <td onclick="userShot('18')"><span id="b18"></span></td>
-                    <td onclick="userShot('19')"><span id="b19"></span></td>
-                </tr>
-                <tr>
-                    <th>C</th>
-                    <td onclick="userShot('20')"><span id="b20"></span></td>
-                    <td onclick="userShot('21')"><span id="b21"></span></td>
-                    <td onclick="userShot('22')"><span id="b22"></span></td>
-                    <td onclick="userShot('23')"><span id="b23"></span></td>
-                    <td onclick="userShot('24')"><span id="b24"></span></td>
-                    <td onclick="userShot('25')"><span id="b25"></span></td>
-                    <td onclick="userShot('26')"><span id="b26"></span></td>
-                    <td onclick="userShot('27')"><span id="b27"></span></td>
-                    <td onclick="userShot('28')"><span id="b28"></span></td>
-                    <td onclick="userShot('29')"><span id="b29"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>D</th>
-                    <td onclick="userShot('30')"><span id="b30"></span></td>
-                    <td onclick="userShot('31')"><span id="b31"></span></td>
-                    <td onclick="userShot('32')"><span id="b32"></span></td>
-                    <td onclick="userShot('33')"><span id="b33"></span></td>
-                    <td onclick="userShot('34')"><span id="b34"></span></td>
-                    <td onclick="userShot('35')"><span id="b35"></span></td>
-                    <td onclick="userShot('36')"><span id="b36"></span></td>
-                    <td onclick="userShot('37')"><span id="b37"></span></td>
-                    <td onclick="userShot('38')"><span id="b38"></span></td>
-                    <td onclick="userShot('39')"><span id="b39"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>E</th>
-                    <td onclick="userShot('40')"><span id="b40"></span></td>
-                    <td onclick="userShot('41')"><span id="b41"></span></td>
-                    <td onclick="userShot('42')"><span id="b42"></span></td>
-                    <td onclick="userShot('43')"><span id="b43"></span></td>
-                    <td onclick="userShot('44')"><span id="b44"></span></td>
-                    <td onclick="userShot('45')"><span id="b45"></span></td>
-                    <td onclick="userShot('46')"><span id="b46"></span></td>
-                    <td onclick="userShot('47')"><span id="b47"></span></td>
-                    <td onclick="userShot('48')"><span id="b48"></span></td>
-                    <td onclick="userShot('49')"><span id="b49"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>F</th>
-                    <td onclick="userShot('50')"><span id="b50"></span></td>
-                    <td onclick="userShot('51')"><span id="b51"></span></td>
-                    <td onclick="userShot('52')"><span id="b52"></span></td>
-                    <td onclick="userShot('53')"><span id="b53"></span></td>
-                    <td onclick="userShot('54')"><span id="b54"></span></td>
-                    <td onclick="userShot('55')"><span id="b55"></span></td>
-                    <td onclick="userShot('56')"><span id="b56"></span></td>
-                    <td onclick="userShot('57')"><span id="b57"></span></td>
-                    <td onclick="userShot('58')"><span id="b58"></span></td>
-                    <td onclick="userShot('59')"><span id="b59"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>G</th>
-                    <td onclick="userShot('60')"><span id="b60"></span></td>
-                    <td onclick="userShot('61')"><span id="b61"></span></td>
-                    <td onclick="userShot('62')"><span id="b62"></span></td>
-                    <td onclick="userShot('63')"><span id="b63"></span></td>
-                    <td onclick="userShot('64')"><span id="b64"></span></td>
-                    <td onclick="userShot('65')"><span id="b65"></span></td>
-                    <td onclick="userShot('66')"><span id="b66"></span></td>
-                    <td onclick="userShot('67')"><span id="b67"></span></td>
-                    <td onclick="userShot('68')"><span id="b68"></span></td>
-                    <td onclick="userShot('69')"><span id="b69"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>H</th>
-                    <td onclick="userShot('70')"><span id="b70"></span></td>
-                    <td onclick="userShot('71')"><span id="b71"></span></td>
-                    <td onclick="userShot('72')"><span id="b72"></span></td>
-                    <td onclick="userShot('73')"><span id="b73"></span></td>
-                    <td onclick="userShot('74')"><span id="b74"></span></td>
-                    <td onclick="userShot('75')"><span id="b75"></span></td>
-                    <td onclick="userShot('76')"><span id="b76"></span></td>
-                    <td onclick="userShot('77')"><span id="b77"></span></td>
-                    <td onclick="userShot('78')"><span id="b78"></span></td>
-                    <td onclick="userShot('79')"><span id="b79"></span></td>
-                    
-                </tr>
-                <tr>
-                    <th>I</th>
-                    <td onclick="userShot('80')"><span id="b80"></span></td>
-                    <td onclick="userShot('81')"><span id="b81"></span></td>
-                    <td onclick="userShot('82')"><span id="b82"></span></td>
-                    <td onclick="userShot('83')"><span id="b83"></span></td>
-                    <td onclick="userShot('84')"><span id="b84"></span></td>
-                    <td onclick="userShot('85')"><span id="b85"></span></td>
-                    <td onclick="userShot('86')"><span id="b86"></span></td>
-                    <td onclick="userShot('87')"><span id="b87"></span></td>
-                    <td onclick="userShot('88')"><span id="b88"></span></td>
-                    <td onclick="userShot('89')"><span id="b89"></span></td>
-                </tr>
-                <tr>
-                    <th>J</th>
-                    <td onclick="userShot('90')"><span id="b90"></span></td>
-                    <td onclick="userShot('91')"><span id="b91"></span></td>
-                    <td onclick="userShot('92')"><span id="b92"></span></td>
-                    <td onclick="userShot('93')"><span id="b93"></span></td>
-                    <td onclick="userShot('94')"><span id="b94"></span></td>
-                    <td onclick="userShot('95')"><span id="b95"></span></td>
-                    <td onclick="userShot('96')"><span id="b96"></span></td>
-                    <td onclick="userShot('97')"><span id="b97"></span></td>
-                    <td onclick="userShot('98')"><span id="b98"></span></td>
-                    <td onclick="userShot('99')"><span id="b99"></span></td>
-                    
-                </tr>
-            </table>
-        </div>
-        
-    </div>
-</body>
 
+    <div class="container mx-auto px-4 py-6 max-w-7xl">
+      <div
+        id="win"
+        class="text-center text-xl sm:text-2xl font-bold mb-4 sm:mb-6 min-h-[2rem]"
+      ></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+        <!-- Player Board -->
+        <div class="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2"
+          >
+            <h3 class="text-lg sm:text-xl font-bold text-red-600">
+              Your Fleet
+            </h3>
+            <div
+              id="p-hits"
+              class="text-xs sm:text-sm font-semibold text-gray-600 bg-gray-100 px-2 sm:px-3 py-1 rounded-full self-start sm:self-auto"
+            >
+              Hits: 0/17
+            </div>
+          </div>
+
+          <div id="placement" class="mb-4 p-3 sm:p-4 bg-blue-50 rounded-lg">
+            <h5
+              id="ship-msg"
+              class="text-xs sm:text-sm font-medium text-blue-800 mb-3"
+            >
+              Place the "Carrier (5 spaces)"
+            </h5>
+            <div
+              class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4"
+            >
+              <span class="text-xs sm:text-sm font-medium text-gray-700"
+                >Orientation:</span
+              >
+              <div
+                class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full bg-gray-300 cursor-pointer"
+                onclick="toggleOrientation()"
+              >
+                <div
+                  id="toggle-slider"
+                  class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out transform translate-x-0"
+                ></div>
+              </div>
+              <span
+                id="orient"
+                class="text-xs sm:text-sm font-medium text-green-600"
+                >Horizontal</span
+              >
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full max-w-md mx-auto border-collapse">
+              <tr>
+                <td class="w-8 h-8"></td>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">1</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">2</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">3</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">4</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">5</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">6</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">7</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">8</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">9</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">10</th>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">A</th>
+                <td
+                  onclick="userShip('00')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p00" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('01')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p01" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('02')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p02" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('03')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p03" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('04')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p04" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('05')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p05" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('06')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p06" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('07')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p07" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('08')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p08" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('09')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p09" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">B</th>
+                <td
+                  onclick="userShip('10')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p10" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('11')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p11" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('12')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p12" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('13')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p13" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('14')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p14" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('15')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p15" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('16')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p16" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('17')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p17" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('18')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p18" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('19')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p19" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">C</th>
+                <td
+                  onclick="userShip('20')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p20" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('21')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p21" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('22')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p22" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('23')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p23" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('24')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p24" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('25')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p25" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('26')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p26" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('27')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p27" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('28')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p28" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('29')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p29" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">D</th>
+                <td
+                  onclick="userShip('30')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p30" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('31')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p31" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('32')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p32" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('33')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p33" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('34')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p34" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('35')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p35" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('36')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p36" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('37')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p37" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('38')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p38" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('39')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p39" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">E</th>
+                <td
+                  onclick="userShip('40')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p40" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('41')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p41" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('42')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p42" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('43')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p43" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('44')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p44" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('45')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p45" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('46')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p46" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('47')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p47" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('48')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p48" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('49')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p49" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">F</th>
+                <td
+                  onclick="userShip('50')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p50" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('51')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p51" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('52')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p52" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('53')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p53" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('54')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p54" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('55')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p55" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('56')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p56" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('57')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p57" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('58')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p58" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('59')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p59" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">G</th>
+                <td
+                  onclick="userShip('60')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p60" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('61')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p61" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('62')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p62" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('63')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p63" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('64')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p64" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('65')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p65" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('66')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p66" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('67')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p67" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('68')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p68" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('69')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p69" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">H</th>
+                <td
+                  onclick="userShip('70')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p70" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('71')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p71" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('72')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p72" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('73')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p73" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('74')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p74" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('75')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p75" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('76')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p76" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('77')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p77" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('78')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p78" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('79')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p79" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">I</th>
+                <td
+                  onclick="userShip('80')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p80" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('81')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p81" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('82')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p82" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('83')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p83" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('84')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p84" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('85')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p85" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('86')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p86" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('87')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p87" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('88')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p88" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('89')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p89" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">J</th>
+                <td
+                  onclick="userShip('90')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p90" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('91')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p91" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('92')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p92" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('93')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p93" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('94')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p94" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('95')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p95" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('96')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p96" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('97')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p97" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('98')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p98" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShip('99')"
+                  class="w-8 h-8 border border-gray-300 bg-blue-100 hover:bg-blue-200 cursor-pointer transition-colors"
+                >
+                  <span id="p99" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Bot Board -->
+        <div class="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2"
+          >
+            <h3 class="text-lg sm:text-xl font-bold text-red-600">
+              Enemy Waters
+            </h3>
+            <div
+              id="b-hits"
+              class="text-xs sm:text-sm font-semibold text-gray-600 bg-gray-100 px-2 sm:px-3 py-1 rounded-full self-start sm:self-auto"
+            >
+              Hits: 0/17
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full max-w-md mx-auto border-collapse">
+              <tr>
+                <td class="w-8 h-8"></td>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">1</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">2</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">3</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">4</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">5</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">6</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">7</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">8</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">9</th>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">10</th>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">A</th>
+                <td
+                  onclick="userShot('00')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b00" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('01')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b01" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('02')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b02" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('03')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b03" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('04')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b04" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('05')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b05" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('06')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b06" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('07')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b07" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('08')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b08" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('09')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b09" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">B</th>
+                <td
+                  onclick="userShot('10')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b10" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('11')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b11" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('12')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b12" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('13')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b13" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('14')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b14" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('15')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b15" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('16')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b16" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('17')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b17" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('18')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b18" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('19')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b19" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">C</th>
+                <td
+                  onclick="userShot('20')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b20" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('21')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b21" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('22')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b22" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('23')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b23" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('24')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b24" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('25')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b25" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('26')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b26" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('27')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b27" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('28')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b28" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('29')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b29" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">D</th>
+                <td
+                  onclick="userShot('30')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b30" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('31')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b31" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('32')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b32" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('33')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b33" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('34')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b34" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('35')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b35" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('36')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b36" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('37')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b37" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('38')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b38" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('39')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b39" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">E</th>
+                <td
+                  onclick="userShot('40')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b40" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('41')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b41" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('42')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b42" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('43')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b43" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('44')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b44" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('45')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b45" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('46')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b46" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('47')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b47" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('48')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b48" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('49')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b49" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">F</th>
+                <td
+                  onclick="userShot('50')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b50" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('51')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b51" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('52')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b52" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('53')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b53" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('54')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b54" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('55')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b55" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('56')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b56" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('57')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b57" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('58')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b58" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('59')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b59" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">G</th>
+                <td
+                  onclick="userShot('60')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b60" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('61')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b61" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('62')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b62" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('63')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b63" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('64')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b64" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('65')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b65" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('66')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b66" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('67')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b67" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('68')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b68" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('69')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b69" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">H</th>
+                <td
+                  onclick="userShot('70')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b70" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('71')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b71" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('72')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b72" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('73')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b73" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('74')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b74" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('75')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b75" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('76')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b76" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('77')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b77" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('78')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b78" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('79')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b79" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">I</th>
+                <td
+                  onclick="userShot('80')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b80" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('81')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b81" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('82')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b82" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('83')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b83" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('84')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b84" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('85')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b85" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('86')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b86" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('87')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b87" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('88')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b88" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('89')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b89" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+              <tr>
+                <th class="w-8 h-8 text-xs font-bold text-gray-600">J</th>
+                <td
+                  onclick="userShot('90')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b90" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('91')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b91" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('92')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b92" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('93')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b93" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('94')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b94" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('95')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b95" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('96')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b96" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('97')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b97" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('98')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b98" class="block w-4 h-4 mx-auto"></span>
+                </td>
+                <td
+                  onclick="userShot('99')"
+                  class="w-8 h-8 border border-gray-300 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors"
+                >
+                  <span id="b99" class="block w-4 h-4 mx-auto"></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
